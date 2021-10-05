@@ -93,17 +93,15 @@ public class LogPassMain extends Application {
         }
     }
 
-    public void closeWindowEvent(WindowEvent event) {
-        System.out.println("Window close request ...");
-    }
-
     public void loadInformation() throws JAXBException {
         JAXBContext jabx = JAXBContext.newInstance(SiteInfoXML.class);
         Unmarshaller unmarshaller = jabx.createUnmarshaller();
         SiteInfoXML siteInfoXML = (SiteInfoXML) unmarshaller.unmarshal(saveFile);
 
-        siteList.clear();
-        siteList.addAll(siteInfoXML.getSiteList());
+        if(siteInfoXML.getSiteList() != null) {
+            siteList.clear();
+            siteList.addAll(siteInfoXML.getSiteList());
+        }
     }
 
     public void saveInformation() {
